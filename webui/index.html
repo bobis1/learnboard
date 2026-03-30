@@ -6,14 +6,63 @@
 </head>
 
 <body>
-    <div>
-    <form action="/action_page.php">
-    <input type="file" id="myFile" name="filename">
-    <input type="submit">
-    </form>
+    <div id = "volumeContainer" class="volume">
+    <div id="volumeContainerhandle">
+    <h1 style="cursor: move; margin: 0; padding-bottom: 10px;">Volume slider</h1>
     </div>
-    <div class="volume">
-    <h1>Volume slider</h1>
+    <div class="volumeSlider">
     <input type="range" min="0" max="100" value="30" class="slider" id="volume">
     </div>
+    </div>
+
+    <div id="songSelect" class="songSelect">
+        <h1>Song selection</h1>
+        <button id="songDirSelect">Select Song Directory</button>
+        <ul>
+            <li>Example</li>
+        </ul>
+    </div>
+
+
+<script src="main.js"></script>
+
+
+
+<script>
+dragElement(document.getElementById("volumeContainer"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "handle")) {
+    document.getElementById(elmnt.id + "handle").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}</script>
 </body>

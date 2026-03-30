@@ -2,6 +2,8 @@ let port
 let writer
 
 const volumeSlider = document.getElementById("volume")
+var songDir = "/Songs"
+var loadSongButton = document.getElementById("songSelect")
 
 connectBtn.onclick = async () => {
     try {
@@ -35,4 +37,14 @@ volumeSlider.oninput = v => {
     volDisplay.innerText = val + "%";
     sendCommand("volume" + val);
 }
+
+
+loadSongButton.onclick = async() => {
+    try{
+        const directoryHandle = await window.showDirectoryPicker();
+        
+    }
+}
+
+
 
