@@ -4,8 +4,13 @@ import digitalio
 import audiobusio
 import audiocore
 import time
+import rotaryio
+import audiomixer
+import usb_cdc
 
 dac = audiobusio.I2SOut(bit_clock=board.GPIO1028_ADC2, word_select=board.GPIO1028_ADC0, data= board.GPIO1028_ADC1)
+mixer = audiomixer.Mixer(voice_count=1, sample_rate=22050, channels=1, bits_per_sample=16, samples_per_frame=512)
+dac.play(mixer)
 
 rows = [board.GPIO100, board.GPIO101, board.GPIO102]
 cols = [board.GPIO103, board.GPIO104, board.GPIO105, board.GPIO106, board.GPIO107, board.GPIO108, board.GPIO109]
@@ -54,129 +59,217 @@ iswav5Playing = False
 iswav6Playing = False
 iswav7Playing = False
 
-playingTime = 0.25
+L = []
 
+L[0], = digitalio.DigitalInOut(board.GPIO10)
+L[1], = digitalio.DigitalInOut(board.GPIO11)
+L[2], = digitalio.DigitalInOut(board.GPIO12)
+L[3], = digitalio.DigitalInOut(board.GPIO13)
+L[4], = digitalio.DigitalInOut(board.GPIO14)
+L[5], = digitalio.DigitalInOut(board.GPIO15)
+L[6], = digitalio.DigitalInOut(board.GPIO16)
+L[7], = digitalio.DigitalInOut(board.GPIO17)
+L[8], = digitalio.DigitalInOut(board.GPIO18)
+L[9]  = digitalio.DigitalInOut(board.GPIO19)
+
+
+encoder = rotaryio.IncrementalEncoder(board.GPIO20, board.GPIO21)
+
+Freeplay = True
+
+
+ticks = 20.0
+
+
+
+playingTime = 0.2
+
+usb_cdc.enable(True)
 
 
 while True:
+
     event = matrix.events.get()
+    position = encoder.position
+    if position != enc_pos:
+        enc_pos = position
+        volume = position/20.0
+        volume = max(0.0, min(1.0, volume))
+        mixer.voice.level = volume
+
+    if usb_cdc.console.in_waiting > 1:
+        raw_data = usb_cdc.console.readline()
+        line = str(raw_data, "utf-8").strip()
+        line = str(raw_data, "utf-8").strip()
+        if line.startswith("V"):
+            try:
+                new_vol = float(line[1:]) / 100
+                mixer.voice[0].level = new_vol
+            except:
+                pass
+        if line.startswith("S"):
+            try:
+                nextLight = int(line[1:])
+                nextTime = float(line[2:])
+                L[nextLight].value = True
+                t = time.time()
+                nextNote = True
+            except:
+                pass
+
+
+    if nextNote:
+        Tc = t - time.time()
+        if Tc >= nextTime:
+            L[nextLight].value = False
+            nextNote = False
+
+
     if event:
         print(event.key_number, event.pressed)
-        match event.key_number:
-            case 9:
-                if iswav0Playing == False:
-                    dac.play(wav0)
-                    nWav0 = time.time()
-                    iswav0Playing = True
-            case 10:
-                if iswav1Playing == False:
-                    dac.play(wav0)
-                    nWav1 = time.time()
-                    iswav1Playing = True
-            case 11:
-                if iswav2Playing == False:
-                    dac.play(wav2)
-                    nWav2 = time.time()
-                    iswav2Playing = True
-            case 12:
-                if iswav3Playing == False:
-                    dac.play(wav3)
-                    nWav3 = time.time()
-                    iswav3Playing = True
-            case 13:
-                if iswav4Playing == False:
-                    dac.play(wav4)
-                    nWav4 = time.time()
-                    iswav4Playing = True
-            case 14:
-                if iswav5Playing == False:
-                    dac.play(wav5)
-                    nWav5 = time.time()
-                    iswav5Playing = True
-            case 15:
-                if iswav6Playing == False:
-                    dac.play(wav6)
-                    nWav6 = time.time()
-                    iswav6Playing = True
-            case 16:
-                if iswav7Playing == False:
-                    dac.play(wav7)
-                    nWav7 = time.time()
-                    iswav7Playing = True
-            case 17:
-                if iswav0Playing == False:
-                    dac.play(wav0)
-                    nWav0 = time.time()
-                    iswav0Playing = True
-            case 18:
-                if iswav1Playing == False:
-                    dac.play(wav1)
-                    nWav1 = time.time()
-                    iswav1Playing = True
-            case 19:
-               if iswav2Playing == False:
-                    dac.play(wav1)
-                    nWav2 = time.time()
-                    iswav2Playing = True
-            case 20:
-               if iswav3Playing == False:
-                    dac.play(wav3)
-                    nWav1 = time.time()
-                    iswav3Playing = True
-            case 21:
-               if iswav4Playing == False:
-                    dac.play(wav4)
-                    nWav4 = time.time()
-                    iswav4Playing = True
-            case 22:
-               if iswav5Playing == False:
-                    dac.play(wav5)
-                    nWav5 = time.time()
-                    iswav5Playing = True
-            case 23:
-               if iswav6Playing == False:
-                    dac.play(wav6)
-                    nWav6 = time.time()
-                    iswav6Playing = True
-            case 24:
-                if iswav7Playing == False:
-                    dac.play(wav7)
-                    nWav7 = time.time()
-                    iswav7Playing = True
-            case _:
-                print("unknown")
+        if Freeplay:
+            match event.key_number:
+                case 9:
+                    if iswav0Playing == False:
+                        mixer.play(wav0)
+                        L[5].value = True
+                        nWav0 = time.time()
+                        iswav0Playing = True
+                case 10:
+                    if iswav1Playing == False:
+                        mixer.play(wav1)
+                        nWav1 = time.time()
+                        L[0].value = True
+                        iswav1Playing = True
+                case 11:
+                    if iswav2Playing == False:
+                        mixer.play(wav2)
+                        L[6].value = True
+                        nWav2 = time.time()
+                        iswav2Playing = True
+                case 12:
+                    if iswav3Playing == False:
+                        mixer.play(wav3)
+                        L[1].value = True
+                        nWav3 = time.time()
+                        iswav3Playing = True
+                case 13:
+                    if iswav4Playing == False:
+                        mixer.play(wav4)
+                        L[7].value = True
+                        nWav4 = time.time()
+                        iswav4Playing = True
+                case 14:
+                    if iswav5Playing == False:
+                        mixer.play(wav5)
+                        L[2].value = True
+                        nWav5 = time.time()
+                        iswav5Playing = True
+                case 15:
+                    if iswav6Playing == False:
+                        mixer.play(wav6)
+                        L[8].value = True
+                        nWav6 = time.time()
+                        iswav6Playing = True
+                case 16:
+                    if iswav7Playing == False:
+                        mixer.play(wav7)
+                        L[3].value = True
+                        nWav7 = time.time()
+                        iswav7Playing = True
+                case 17:
+                    if iswav0Playing == False:
+                        mixer.play(wav0)
+                        L[5].value = True
+                        nWav0 = time.time()
+                        iswav0Playing = True
+                case 18:
+                    if iswav1Playing == False:
+                        mixer.play(wav1)
+                        L[0].value = True
+
+                        nWav1 = time.time()
+                        iswav1Playing = True
+                case 19:
+                    if iswav2Playing == False:
+                        mixer.play(wav1)
+                        L[6].value = True
+                        nWav2 = time.time()
+                        iswav2Playing = True
+                case 20:
+                    if iswav3Playing == False:
+                        mixer.play(wav3)
+                        L[1].value = True
+                        nWav1 = time.time()
+                        iswav3Playing = True
+                case 21:
+                    if iswav4Playing == False:
+                        mixer.play(wav4)
+                        L[7].value = True
+                        nWav4 = time.time()
+                        iswav4Playing = True
+                case 22:
+                    if iswav5Playing == False:
+                        mixer.play(wav5)
+                        L[2].value = True
+                        nWav5 = time.time()
+                        iswav5Playing = True
+                case 23:
+                    if iswav6Playing == False:
+                        mixer.play(wav6)
+                        L[8].value = True
+                        nWav6 = time.time()
+                        iswav6Playing = True
+                case 24:
+                    if iswav7Playing == False:
+                        mixer.play(wav7)
+                        L[3].value = True
+                        nWav7 = time.time()
+                        iswav7Playing = True
+                case _:
+                    print("unknown")
     if iswav0Playing:
         currTime = time.time() - nWav0;
         if currTime >= playingTime:
-            dac.stop(wav0)
+            mixer.stop(wav0)
+            L[5].value = False
+
     if iswav1Playing:
         currTime = time.time() - nWav1;
         if currTime >= playingTime:
-            dac.stop(wav1)
+            mixer.stop(wav1)
+            L[0].value = False
+
     if iswav2Playing:
         currTime = time.time() - nWav2;
         if currTime >= playingTime:
-            dac.stop(wav2)
+            mixer.stop(wav2)
+            L[6].value = False
     if iswav3Playing:
         currTime = time.time() - nWav3;
         if currTime >= playingTime:
-            dac.stop(wav3)
+            mixer.stop(wav3)
+            L[1].value = False
     if iswav4Playing:
         currTime = time.time() - nWav4;
         if currTime >= playingTime:
-            dac.stop(wav4)
+            mixer.stop(wav4)
+            L[7].value = False
     if iswav5Playing:
         currTime = time.time() - nWav5;
         if currTime >= playingTime:
-            dac.stop(wav5)
+            mixer.stop(wav5)
+            L[2].value = False
     if iswav6Playing:
         currTime = time.time() - nWav6;
         if currTime >= playingTime:
-            dac.stop(wav6)
+            mixer.stop(wav6)
+            L[8].value = True
     if iswav7Playing:
         currTime = time.time() - nWav7;
         if currTime >= playingTime:
-            dac.stop(wav7)
+            L[3].value = True
+            mixer.stop(wav7)
 
-while dac.playing:
+while mixer.playing:
     pass
