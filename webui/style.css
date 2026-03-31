@@ -1,17 +1,22 @@
 .volumeSlider {
   -webkit-appearance: none;
-    appearance: none;
-  width: 100%;
+  appearance: none;
+  width: 55%;
   /*Full-width*/height: 25px;
   /*Specifiedheight*/background: #b0ecf8;
   /*Greybackground*/outline: none;
-  /*Removeoutline*/opacity: 0.7;
+  /*Removeoutline*/opacity: 1;
   /*Settransparency(formouse-overeffectsonhover)*/-webkit-transition: .2s;
   /*0.2secondstransitiononhover*/transition: opacity .2s;
   -webkit-transition: opacity .2s;
   -moz-transition: opacity .2s;
   -ms-transition: opacity .2s;
   -o-transition: opacity .2s;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 }
 
 
@@ -33,4 +38,22 @@
   padding-right: 30px;
   padding-bottom: 50px;
   padding-left: 80px;
+}
+
+
+
+.songSelect{
+    position: absolute;
+}
+
+
+input[type="file"]::file-selector-button {
+  background-color: #45475a; /* Matches your light button color */
+  color: #b4befe;
+  border: 1px solid #99999900;
+  border-radius: 8px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
 }

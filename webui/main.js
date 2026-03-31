@@ -2,8 +2,11 @@ let port
 let writer
 
 const volumeSlider = document.getElementById("volume")
-var songDir = "/Songs"
-var loadSongButton = document.getElementById("songSelect")
+const loadSongButton = document.getElementById("songSelect")
+const songUpload = document.getElementById("songfile")
+var uploadedSong
+const recentSongPlayButton = document.getElementById("CurrentSong")
+
 
 connectBtn.onclick = async () => {
     try {
@@ -33,18 +36,47 @@ async function playSong(songData) {
 }
 
 volumeSlider.oninput = v => {
-    print(v)
-    volDisplay.innerText = val + "%";
-    sendCommand("volume" + val);
+    
+  //  volDisplay.innerText = val + "%";
+    sendCommand("volume" + v);
 }
 
+/*
+songDirSelect.onclick = async() => {
+    console.log("Song dir select is working")
+        const directoryHandle = await window.showFilePicker();
+        document.getElementById("songList").innerHTML = ""
+        for await(const entry of directoryHandle.values){
+            if(entry.kind == 'file' && entry.name.endsWith('.json')){
+                const listItem = document.createElement('li')
+                listItem.innerHTML = entry.name
 
-loadSongButton.onclick = async() => {
+            }
+        }
+}*/
+
+songUpload.addEventListener('change', (event) => {
+    uploadedSong = event.target.files[0]
+    recentSongPlayButton.textContent = uploadedSong.name
+});
+
+CurrentSong.onclick = async() => {
     try{
-        const directoryHandle = await window.showDirectoryPicker();
-        
+    loadAndPlaySong(uploadedSong)
+    } catch{
+        return
+    }
+
+}
+
+async function loadAndPlaySong(fileHandle) {
+    const file = await fileHandle.getFile();
+    const contents = await file.text();
+    try {
+        const songData = JSON.parse(contents);
+        console.log("Playing:", fileHandle.name);
+        playSong(songData);
+    } catch (e) {
+        console.error("Error parsing song file", e);
     }
 }
-
-
-
