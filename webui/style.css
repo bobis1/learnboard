@@ -3,7 +3,7 @@
   appearance: none;
   width: 55%;
   /*Full-width*/height: 25px;
-  /*Specifiedheight*/background: #b0ecf8;
+  /*Specifiedheight*/background: #45475a;
   /*Greybackground*/outline: none;
   /*Removeoutline*/opacity: 1;
   /*Settransparency(formouse-overeffectsonhover)*/-webkit-transition: .2s;
@@ -25,7 +25,7 @@
   appearance: none;
   width: 25px;
   height: 25px;
-  background: #04AA6D;
+  background: #b4befe;
   cursor: crosshair;
 }
 
@@ -45,6 +45,7 @@
 .songSelect{
     position: absolute;
 }
+
 
 
 input[type="file"]::file-selector-button {

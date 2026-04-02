@@ -4,8 +4,10 @@ let writer
 const volumeSlider = document.getElementById("volume")
 const loadSongButton = document.getElementById("songSelect")
 const songUpload = document.getElementById("songfile")
+const freeplaycheck = document.getElementById("freeplaycheck")
 var uploadedSong
 const recentSongPlayButton = document.getElementById("CurrentSong")
+var isFreeplay = true
 
 
 connectBtn.onclick = async () => {
@@ -31,14 +33,17 @@ async function sendCommand(command) {
 async function playSong(songData) {
     for (let note of songData) {
         await new Promise(r => setTimeout(r, note.t));
-        sendCommand("S" + note.k);
+        sendCommand("K" + note.k);
+        sendCommand("T" + note.t);
+        console.log("K" + note.k);
+        console.log("T" + note.t);
     }
 }
 
 volumeSlider.oninput = v => {
-    
   //  volDisplay.innerText = val + "%";
-    sendCommand("volume" + v);
+    sendCommand("V" + volumeSlider.value);
+    console.log("V" + volumeSlider.value);
 }
 
 /*
@@ -66,11 +71,16 @@ CurrentSong.onclick = async() => {
     } catch{
         return
     }
+}
 
+freeplaycheck.oninput = f => {
+    isFreeplay = !isFreeplay
+    sendCommand("F" + isFreeplay);
+    console.log("F" + isFreeplay);
 }
 
 async function loadAndPlaySong(fileHandle) {
-    const file = await fileHandle.getFile();
+    const file = await fileHandle;
     const contents = await file.text();
     try {
         const songData = JSON.parse(contents);

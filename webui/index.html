@@ -19,15 +19,23 @@
     <h1 style="cursor: move; margin: 1.2px;">Volume slider</h1>
     </div>
     <div class="volumeSlider">
-    <input type="range" min="0" max="100" value="30" class="slider" id="volume">
+    <input style="color: #b4befe;" type="range" min="0" max="100" value="30" class="slider" id="volume">
     </div>
     </div>
 
     <div id="songSelect" class="songSelect" style="border: solid; color: #b4befe; border-radius: 12px; padding: 16px; background-color: #1e1e2e; cursor: move; padding-top: 0;">
-        <h1 style="margin: 1.2px;">Song selection</h1>
+        <h1 style="margin: 1.2px; cursor: move;">Song selection</h1>
         <label for="myfile">Select a file:</label>
         <input type="file" id="songfile" style="border-radius: 12px; color: #b4befe; background-color: #45475a;">
         <div><button id = "CurrentSong" style="border-radius: 12px; color: #b4befe; background-color: #45475a;">Play Current Song</button></div>
+    </div>
+
+    <div id="freeplay" style=" position: absolute; border: solid; color: #b4befe; border-radius: 12px; padding: 16px; background-color: #1e1e2e; cursor: move; padding-top: 0;">
+      <h1 style="cursor: move; margin: 1.2px;" id="freeplayhandle">Freeplay</h1>
+      <label> Is freeplaying
+      <input style="color: #b4befe;" id="freeplaycheck" type="checkbox" checked="checked">
+      <span class="checkmark"></span>
+      </label>
     </div>
 
 
@@ -37,8 +45,9 @@
 
 <script>
 dragElement(document.getElementById("volumeContainer"));
-dragElement(document.getElementById("songSelect"))
-dragElement(document.getElementById("connect"))
+dragElement(document.getElementById("songSelect"));
+dragElement(document.getElementById("connect"));
+dragElement(document.getElementById("freeplay"));
 
 
 function dragElement(elmnt) {
@@ -46,7 +55,6 @@ function dragElement(elmnt) {
   if (document.getElementById(elmnt.id + "handle")) {
     document.getElementById(elmnt.id + "handle").onmousedown = dragMouseDown;
   } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
   }
   function dragMouseDown(e) {
@@ -65,7 +73,6 @@ function dragElement(elmnt) {
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-    // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
