@@ -503,7 +503,7 @@
       "plot": "Gerber/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "learnboard.step",
+      "step": "learnboard.stl",
       "svg": "",
       "vrml": ""
     },
