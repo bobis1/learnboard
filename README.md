@@ -8,15 +8,18 @@ Learnboard is a midi keyboard that I designed to "get my foot through the door" 
 
 ## PCB
 The learnboard's PCB has 2 layers.
-![image](pcb.png)
-![image](rend.png)
+![image](assets/pcb.png)
+![image](assets/rend.png)
 
 ## Usage
-To use the learnboard in the most basic context you simply hit the keys and the corresponding LED on that key will light up. To use the non freeplay mode you must use the webui that is inside the respective folder(This is a html document). From there you can adjust many things with the learnboard(Such as volume). The song loading works by loading .json files through the webui. To connect the midi keyboard to the webui you have to connect the midi keyboard to your computer.
+To use the learnboard in the most basic context you simply hit the keys and the corresponding LED on that key will light up. To use the non freeplay mode you must use the webui that is inside the respective folder(This is a html document). From there you can adjust many things with the learnboard(Such as volume). The song loading works by loading .json files through the webui. To connect the midi keyboard to the webui you have to connect the midi keyboard to your computer. Then click the connect button on the connect window(These windows are partially based on the webos jam).
 
 ## Case
-![image](onshape.png)
+![image](assets/onshape.png)
 The case can be printed in several pieces. To hold the case pieces that are printed seperately there are "bowtie" connectors to connect these. The connector for the case top and the case bottom can be printed however a machine screw can also be used for that purpose. The .step files will be in the CAD folder. When printing I split the case into four parts. Two of the parts are in the Case.step file and the other two are in the caseTop.step file
+Here is the link to the onshape.
+https://cad.onshape.com/documents/c06ae8a09bf7d6a8ae56adf7/w/ad5690a7cddb318995ea60e9/e/4d9e64b951ffeda1f3958e44?renderMode=0&uiState=
+
 
 ## BOM
 Here is the BOM. I put n/a in place of anything that I already had.
@@ -34,9 +37,14 @@ Here is the BOM. I put n/a in place of anything that I already had.
 |    |                                                                        |                                                    |          |                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |            |             |   | Total             | $64.68 |
 
 
+
+
+
 ### poster
 ![image](poster/Learnboard%20poster.png)
 
 ## References
 https://blueprint.hackclub.com/starter-projects/midi
 This is a project I got alot of the idea from.
+https://jams.hackclub.com/batch/webOS
+Where I got the ideas for the windows from
