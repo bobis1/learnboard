@@ -36,3 +36,7 @@ Here is the BOM. I put n/a in place of anything that I already had.
 
 ### poster
 ![image](poster/Learnboard%20poster.png)
+
+## References
+https://blueprint.hackclub.com/starter-projects/midi
+This is a project I got alot of the idea from.
