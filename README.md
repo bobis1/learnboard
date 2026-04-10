@@ -14,6 +14,16 @@ The learnboard's PCB has 2 layers.
 ## Usage
 To use the learnboard in the most basic context you simply hit the keys and the corresponding LED on that key will light up. To use the non freeplay mode you must use the webui that is inside the respective folder(This is a html document). From there you can adjust many things with the learnboard(Such as volume). The song loading works by loading .json files through the webui. To connect the midi keyboard to the webui you have to connect the midi keyboard to your computer. Then click the connect button on the connect window(These windows are partially based on the webos jam).
 
+## Flashing
+You can get the firmwware from the firmware folder of the repo. For this you can follow the circuit python tutorial for the board here: https://circuitpython.org/board/raspberry_pi_pico/ .
+
+## Assembly
+(When I actually have everything I will have images)
+To assemble the learnboard you must first 3d print the case along with it's connectors. You need to print both parts of Case.step and caseTop.step. You need to print 2 Connector.step parts and 2 ConnectorWedge.step parts(This is if you are using printed connectors to connect the top and bottom of the case). You need 4 prints of teh PrintConnector.step file. When you have these printed slot the PrintConnectors into their respective bowtie slots in the cases.
+![image](assets/bowtiehole.png)(Looks like this). If you are using the printed connectors slot the Connector.step results into the two holes on the cases.Then put the wedge up the fork of the connector.
+
+
+
 ## Case
 ![image](assets/onshape.png)
 The case can be printed in several pieces. To hold the case pieces that are printed seperately there are "bowtie" connectors to connect these. The connector for the case top and the case bottom can be printed however a machine screw can also be used for that purpose. The .step files will be in the CAD folder. When printing I split the case into four parts. Two of the parts are in the Case.step file and the other two are in the caseTop.step file
