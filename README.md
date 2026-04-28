@@ -47,7 +47,7 @@ Here is the BOM. I put n/a in place of anything that I already had.
 |  |  |  |  |  |  |  |  |  | Total | $65.67 |
 The .csv file for the BOM can be found [here](ReadmeAssets/BOM.csv)
 
-### poster
+### Poster
 ![image](poster/Learnboard%20poster.png)
 The .pdf file for the poster can be found [here](poster/Learnboardposter.pdf)
 
