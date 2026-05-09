@@ -8,6 +8,12 @@ import rotaryio
 import audiomixer
 import usb_cdc
 
+import usb_midi
+import adafruit_midi
+from adafruit_midi.note_off import NoteOff
+from adafruit_midi.note_on import NoteOn
+from adafruit_midi.pitch_bend import PitchBend
+
 dac = audiobusio.I2SOut(bit_clock=board.GPIO1028_ADC2, word_select=board.GPIO1028_ADC0, data= board.GPIO1028_ADC1)
 mixer = audiomixer.Mixer(voice_count=1, sample_rate=22050, channels=1, bits_per_sample=16, samples_per_frame=512)
 dac.play(mixer)

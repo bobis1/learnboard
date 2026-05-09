@@ -9,7 +9,13 @@ Learnboard is a midi keyboard that I designed to "get my foot through the door" 
 ## PCB
 The learnboard's PCB has 2 layers.
 ![image](ReadmeAssets/pcb.png)
-![image](ReadmeAssets/rend.png)
+
+Here is the schematic for the PCB
+![image](ReadmeAssets/Schematic.png)
+
+Here is a 3D model of the pcb
+![image](ReadmeAssets/PCBrend.png)
+
 
 ## Usage
 To use the learnboard in the most basic context you simply hit the keys and the corresponding LED on that key will light up. To use the non freeplay mode you must use the webui that is inside the respective folder(This is a html document). From there you can adjust many things with the learnboard(Such as volume). The song loading works by loading .json files through the webui. To connect the midi keyboard to the webui you have to connect the midi keyboard to your computer. Then click the connect button on the connect window(These windows are partially based on the webos jam).
