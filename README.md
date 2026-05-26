@@ -14,7 +14,7 @@ Here is the schematic for the PCB
 ![image](ReadmeAssets/Schematic.png)
 
 Here is a 3D model of the pcb
-![image](ReadmeAssets/PCBrend.png)
+![image](ReadmeAssets/3dPCB.png)
 
 
 ## Usage
@@ -34,7 +34,7 @@ To assemble the learnboard you must first 3d print the case along with it's conn
 ![image](ReadmeAssets/onshape.png)
 The case can be printed in several pieces. To hold the case pieces that are printed seperately there are "bowtie" connectors to connect these. The connector for the case top and the case bottom can be printed however a machine screw can also be used for that purpose. The .step files will be in the CAD folder. When printing I split the case into four parts. Two of the parts are in the Case.step file and the other two are in the caseTop.step file
 Here is the link to the onshape.
-https://cad.onshape.com/documents/c06ae8a09bf7d6a8ae56adf7/w/ad5690a7cddb318995ea60e9/e/4d9e64b951ffeda1f3958e44?renderMode=0&uiState=
+https://cad.onshape.com/documents/c06ae8a09bf7d6a8ae56adf7/w/ad5690a7cddb318995ea60e9/e/03d033c41fe9f6e94a9a3737
 
 
 ## BOM
