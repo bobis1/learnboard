@@ -30,3 +30,8 @@ https://lapse.hackclub.com/timelapse/HOAYPzRP_kXY
 https://lapse.hackclub.com/timelapse/R-7RvlI27MGb
 
 **Total Time Spent: 0.88 hours** 
+
+
+# Nov 16: Testing
+
+I am finding out that I probably soldered most of the buttons wrong since the 
