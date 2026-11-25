@@ -32,6 +32,17 @@ https://lapse.hackclub.com/timelapse/R-7RvlI27MGb
 **Total Time Spent: 0.88 hours** 
 
 
-# Nov 16: Testing
+# Nov 23: Testing and Bodging
+At first I thought that there might be an issue with how I soldered some of the switches. That was part of the issue. I also found out that I connected some of the traces incorrectly to the diodes. 
+I forgot to record about 1 hour of me debugging the firmware further and soldering on the PC1500 chip and bodging  wires onto the PCB. I went through with an AI to see any logic errors that I would not have noticed. Now when I hit a key there is a Raw key output when I hit a key. I found out that on SW1 and SW9 there was a short where the button was not routed through a diode but instead there was a wire there. I also managed improve the keys for the learnboard so that the keys have a keyboard switch part along side a bar to link them together. I also found out that the way I mapped my keys was completely wrong. I will figure out what the actual key pairs are. I will also have to find a way to have smaller audio files on the board itself. BODGED BOARD IMAGE HERE. I think that I want to use proceeedurally generated chip music. It would be incredibly interesting.
 
-I am finding out that I probably soldered most of the buttons wrong since the 
+
+NOTE ABOUT TIME: I spent like an hour without recording it just subtract 1 hour if that doesn't work out.
+**Total Time spent 2.5833**
+
+-Recording Links
+https://lapse.hackclub.com/timelapse/lLlq9djmOrmk
+https://lapse.hackclub.com/timelapse/hyj1gHSd5-NU
+https://lapse.hackclub.com/timelapse/4BCUUQA60GxU
+https://lapse.hackclub.com/timelapse/WORHV82KfiZ2
+
